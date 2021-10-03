@@ -6,7 +6,9 @@
     <div class="row">
         <div class="col-12">
         <h2 class="mb-3 float-left">Product Listing</h2>
-        <a href="{{ route('admin.products.create') }}" class="btn btn-md btn-success float-right" role="button">Add Product</a>
+        @can('is-admin')
+            <a href="{{ route('admin.products.create') }}" class="btn btn-md btn-success float-right" role="button">Add Product</a>
+        @endcan
         </div>
     </div>
     <div class="card px-2">
@@ -18,7 +20,9 @@
                 <th scope="col">Product Description</th>
                 <th scope="col">UnitPrice</th>
                 <th scope="col">Available</th>
+                @can('is-admin')
                 <th scope="col">Actions</th>
+                @endcan
             </tr>
             </thead>
             <tbody>
@@ -26,9 +30,10 @@
                 <tr>
                     <th scope="row">{{ $product->id }}</th>
                     <td>{{ $product->ProdName }}</td>
-                    <td>{{ $product->ProdDesc }}</td>
+                    <td>{{ $product->ProdDescription }}</td>
                     <td>{{ $product->UnitPrice }}</td>
                     <td>{{ $product->isAvailable }}</td>
+                    @can('is-admin')
                     <td>
                         <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-sm btn-warning" role="button">Edit</a>
                         
@@ -45,6 +50,7 @@
                             @method('DELETE')
                         </form>
                     </td>
+                    @endcan
                 </tr>
             @endforeach    
             </tbody>

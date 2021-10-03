@@ -5,8 +5,8 @@
   @include('partials.alerts')
   <div class="row">
      <div class="col-12">
-      <h2 class="mb-3 float-left">User Listing</h2>
-      <a href="{{ route('admin.users.create') }}" class="btn btn-md btn-success float-right" role="button">Add User</a>
+      <h2 class="mb-3 float-left">Employee Listing</h2>
+      <a href="{{ route('admin.users.create') }}" class="btn btn-md btn-success float-right" role="button">Add Employee</a>
      </div>
   </div>
   <div class="card px-2">
@@ -16,7 +16,6 @@
               <th scope="col">ID#</th>
               <th scope="col">Name</th>
               <th scope="col">Email</th>
-              <th scope="col">Role</th>
               <th scope="col">Actions</th>
           </tr>
           </thead>
@@ -26,7 +25,6 @@
                   <th scope="row">{{ $user->id }}</th>
                   <td>{{ $user->name }}</td>
                   <td>{{ $user->email }}</td>
-                  <td>{{ $user->role }}</td>
                   <td>
                       <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-sm btn-warning" role="button">Edit</a>
                       

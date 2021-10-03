@@ -14,6 +14,12 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('isAdmin')->except('index');
+    }
+
     public function index()
     {
         $products = Products::paginate(10);
@@ -27,7 +33,7 @@ class ProductsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {   
         return view('admin.products.create');
     }
 

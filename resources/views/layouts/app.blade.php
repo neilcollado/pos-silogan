@@ -23,9 +23,11 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
+                @guest
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
+                @endguest
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -34,8 +36,10 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                        @auth
-                        <a href="{{ url('/home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline pr-2">Home</a>
-                        <a href="{{ route('admin.users.index') }}" class="text-sm text-gray-700 dark:text-gray-500 underline pr-2">Users</a>
+                        <a href="{{ url('/') }}" class="text-sm text-gray-700 dark:text-gray-500 underline pr-2">Home</a>
+                        @can('is-admin')
+                            <a href="{{ route('admin.users.index') }}" class="text-sm text-gray-700 dark:text-gray-500 underline pr-2">Employees</a>
+                        @endcan
                         <a href="{{ route('admin.products.index') }}" class="text-sm text-gray-700 dark:text-gray-500 underline pr-2">Products</a>
                        @endauth
                     </ul>

@@ -15,16 +15,16 @@ use App\Http\Controllers\Admin\UserController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('home');
+})->middleware('auth');
 
 Auth::routes();
 
 //Admin Routes
 Route::prefix('admin')->middleware('auth')->name('admin.')->group(function(){
     Route::resource('/products', ProductsController::class);
-    Route::resource('/users', UserController::class);
+    Route::resource('/users', UserController::class)->middleware('isAdmin');
 });
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
