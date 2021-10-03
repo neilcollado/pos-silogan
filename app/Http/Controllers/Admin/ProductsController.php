@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Products;
 use App\Models\Category;
-use Illuminate\Support\Facades\Gate;
 
 class ProductsController extends Controller
 {
@@ -15,11 +14,10 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
     public function index()
     {
         $products = Products::paginate(10);
-        
+
         return view('admin.products.index', ['products' => $products]);
     }
 
@@ -50,8 +48,6 @@ class ProductsController extends Controller
         $product->category_id = request('category');
         $product->ProdPicture = request('prodpicture');
         $product->save();
-        
-        $request->session()->flash('success', 'Product stored successful');
         return redirect(route('admin.products.index'));
     }  
 
@@ -90,20 +86,12 @@ class ProductsController extends Controller
     public function update(Request $request, $id)
     {
         $product = Products::findOrFail($id);
-
-        if(!$product) {
-            $request->session()->flash('error', 'Edit Failed.');
-            return redirect(route('admin.products.index'));
-        }
-
         $product->ProdName = request('prodname');
         $product->ProdDescription = request('desc');
         $product->UnitPrice = request('unitprice');
         $product->category_id = request('category');
         $product->ProdPicture = request('prodpicture');
         $product->save();
-
-        $request->session()->flash('success', 'Product edit successful');
         return redirect(route('admin.products.index'));
     }
 
@@ -113,11 +101,9 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, Request $request)
+    public function destroy($id)
     {
         Products::destroy($id);
-
-        $request->session()->flash('success', 'Product delete successful');
         return redirect(route('admin.products.index'));
     }
 }
