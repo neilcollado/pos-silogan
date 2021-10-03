@@ -48,6 +48,8 @@ class ProductsController extends Controller
         $product->category_id = request('category');
         $product->ProdPicture = request('prodpicture');
         $product->save();
+
+        $request->session()->flash('success', 'Created Successfully');
         return redirect(route('admin.products.index'));
     }  
 
@@ -92,6 +94,8 @@ class ProductsController extends Controller
         $product->category_id = request('category');
         $product->ProdPicture = request('prodpicture');
         $product->save();
+
+        $request->session()->flash('success', 'Updated Successfully');
         return redirect(route('admin.products.index'));
     }
 
@@ -101,9 +105,11 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
         Products::destroy($id);
+
+        $request->session()->flash('success', 'Deleted Successfully');
         return redirect(route('admin.products.index'));
     }
 }

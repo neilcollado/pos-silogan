@@ -35,7 +35,8 @@
                     <ul class="navbar-nav mr-auto">
                        @auth
                         <a href="{{ url('/home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline pr-2">Home</a>
-                        <a href="{{ route('admin.products.index') }}">Products</a>
+                        <a href="{{ route('admin.users.index') }}" class="text-sm text-gray-700 dark:text-gray-500 underline pr-2">Users</a>
+                        <a href="{{ route('admin.products.index') }}" class="text-sm text-gray-700 dark:text-gray-500 underline pr-2">Products</a>
                        @endauth
                     </ul>
 

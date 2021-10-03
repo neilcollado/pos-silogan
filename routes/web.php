@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProductsController;
+use App\Http\Controllers\Admin\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,8 +21,9 @@ Route::get('/', function () {
 Auth::routes();
 
 //Admin Routes
-Route::prefix('admin')->name('admin.')->group(function(){
+Route::prefix('admin')->middleware('auth')->name('admin.')->group(function(){
     Route::resource('/products', ProductsController::class);
+    Route::resource('/users', UserController::class);
 });
 
 

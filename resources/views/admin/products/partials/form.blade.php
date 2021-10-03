@@ -33,7 +33,7 @@
     <label for="unitprice" class="col-md-4 col-form-label text-md-right">Unit Price</label>
 
     <div class="col-md-2">
-        <input id="unitprice" type="number" min="0" max="100000" step="5" value="{{ old('unitprice') }}@isset($product){{ $product->UnitPrice }}@endisset" class="form-control @error('unitprice') is-invalid @enderror" 
+        <input id="unitprice" type="number" min="0" max="100000" step="1" value="{{ old('unitprice') }}@isset($product){{ $product->UnitPrice }}@endisset" class="form-control @error('unitprice') is-invalid @enderror" 
         name="unitprice" required>
         
         @error('unitprice')
