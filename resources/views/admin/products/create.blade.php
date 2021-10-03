@@ -9,13 +9,12 @@
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('admin.products.store') }}">
-                       @include('admin.products.partials.form')
+                    @include('admin.products.partials.form')
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 @endsection
 
