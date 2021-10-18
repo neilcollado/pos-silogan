@@ -4,7 +4,7 @@
 
     <div class="col-md-6">
         <input id="prodname" type="text" class="form-control @error('prodname') is-invalid @enderror" name="prodname"
-         value="{{ old('prodname') }}@isset($product){{$product->ProdName}}@endisset" required autofocus>
+         value="{{ old('prodname') }}@isset($product){{$product->ProdName}}@endisset" required autocomplete="prodname" autofocus>
 
         @error('prodname')
             <span class="invalid-feedback" role="alert">

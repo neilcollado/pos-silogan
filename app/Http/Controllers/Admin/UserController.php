@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreEmployeeRequest;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Illuminate\Support\Facades\Password;
 
 class UserController extends Controller
 {
@@ -26,7 +29,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.users.create');
     }
 
     /**
@@ -35,9 +38,22 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(StoreEmployeeRequest $request)
+    {   
+        $validatedData = $request->validated();
+
+        $user = User::create([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'password' => Hash::make($validatedData['password']),
+        ]);
+        
+        $user->save();
+
+        Password::sendResetLink($request->only(['email']));
+
+        $request->session()->flash('success', 'Created Successfully');
+        return redirect(route('admin.users.index'));
     }
 
     /**
@@ -48,7 +64,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('admin.users.show', ['user' => $user]);
     }
 
     /**
@@ -59,7 +76,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        return view('admin.users.edit', ['user' => $user]);
     }
 
     /**
@@ -71,7 +89,13 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->name = request('name');
+        $user->email = request('email');
+        
+        $user->save();
+        $request->session()->flash('success', 'Updated Successfully');
+        return redirect(route('admin.users.index'));
     }
 
     /**
@@ -80,8 +104,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+        User::destroy($id);
+        $request->session()->flash('success', 'Deleted Successfully');
+        return redirect(route('admin.users.index'));
     }
 }

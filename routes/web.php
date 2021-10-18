@@ -18,10 +18,12 @@ Route::get('/', function () {
     return view('home');
 })->middleware('auth');
 
-Auth::routes();
+Auth::routes([
+    'register' => false
+]);
 
 //Admin Routes
-Route::prefix('admin')->middleware('auth')->name('admin.')->group(function(){
+Route::middleware('auth')->name('admin.')->group(function(){
     Route::resource('/products', ProductsController::class);
     Route::resource('/users', UserController::class)->middleware('isAdmin');
 });
