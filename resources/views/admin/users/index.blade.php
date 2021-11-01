@@ -26,7 +26,7 @@
                   <td>{{ $user->name }}</td>
                   <td>{{ $user->email }}</td>
                   <td>
-                      <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-sm btn-warning" role="button">Edit</a>
+                      {{-- <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-sm btn-warning" role="button">Edit</a> --}}
                       
                       <a href="{{ route('admin.users.show', $user->id) }}" class="btn btn-sm btn-primary">View</a>
 

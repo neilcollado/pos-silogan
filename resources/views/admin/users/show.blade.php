@@ -12,7 +12,7 @@
           <div class="card-body">
             <h5 class="card-title">{{ $user->name }}</h5>
             <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-sm btn-warning" role="button">Edit</a>
+            {{-- <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-sm btn-warning" role="button">Edit</a> --}}
             <button type="button" class="btn btn-sm btn-danger"
               onclick="event.preventDefault();
               document.getElementById('delete-user-from-{{ $user->id }}').submit()">
