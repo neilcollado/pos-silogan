@@ -20,7 +20,7 @@ Route::get('/', function () {
 })->middleware('auth');
 
 Auth::routes([
-    'register' => false
+    'register' => true
 ]);
 
 //Admin Routes
@@ -31,3 +31,4 @@ Route::middleware('auth')->name('admin.')->group(function(){
 
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/orders', [App\Http\Controllers\OrderController::class, 'index'])->name('order');

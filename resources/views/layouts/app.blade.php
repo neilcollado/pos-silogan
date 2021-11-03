@@ -25,7 +25,7 @@
             <div class="container">
                 @guest
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.name', 'Silogan Order System') }}
                 </a>
                 @endguest
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -41,6 +41,7 @@
                             <a href="{{ route('admin.users.index') }}" class="text-sm text-gray-700 dark:text-gray-500 underline pr-2">Employees</a>
                         @endcan
                         <a href="{{ route('admin.products.index') }}" class="text-sm text-gray-700 dark:text-gray-500 underline pr-2">Products</a>
+                        <a href="/orders" class="text-sm text-gray-700 dark:text-gray-500 underline pr-2">Orders</a>
                        @endauth
                     </ul>
 

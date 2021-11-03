@@ -9,4 +9,5 @@ class Products extends Model
 {
     use HasFactory;
     public $timestamps = false;
+
 }
