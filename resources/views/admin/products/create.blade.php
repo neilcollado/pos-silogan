@@ -8,7 +8,7 @@
                 <div class="card-header">Add Product</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('admin.products.store') }}">
+                    <form method="POST" action="{{ route('admin.products.store') }}" enctype="multipart/form-data">
                        @include('admin.products.partials.form')
                     </form>
                 </div>

@@ -52,7 +52,15 @@ class ProductsController extends Controller
         $product->ProdDescription = request('desc');
         $product->UnitPrice = request('unitprice');
         $product->category_id = request('category');
-        $product->ProdPicture = request('prodpicture');
+
+        if($request->hasFile('prodpicture')) {
+            $file = $request->file('prodpicture');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $file->move('uploads/products', $filename);
+            $product->ProdPicture = $filename;
+        } 
+
         $product->save();
 
         $request->session()->flash('success', 'Created Successfully');
@@ -98,7 +106,15 @@ class ProductsController extends Controller
         $product->ProdDescription = request('desc');
         $product->UnitPrice = request('unitprice');
         $product->category_id = request('category');
-        $product->ProdPicture = request('prodpicture');
+        if($request->hasFile('prodpicture')) {
+            $file = $request->file('prodpicture');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $file->move('uploads/products', $filename);
+            $product->ProdPicture = $filename;
+        } else {
+            $product->ProdPicture = $product->ProdPicture;
+        }
         $product->save();
 
         $request->session()->flash('success', 'Updated Successfully');

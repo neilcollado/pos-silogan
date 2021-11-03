@@ -19,7 +19,7 @@
 
     <div class="col-md-6">
         <input id="desc" type="text" class="form-control @error('desc') is-invalid @enderror" name="desc"
-         value="{{ old('desc') }}@isset($product){{$product->Description}}@endisset">
+         value="{{ old('desc') }}@isset($product){{$product->ProdDescription}}@endisset">
 
         @error('desc')
             <span class="invalid-feedback" role="alert">

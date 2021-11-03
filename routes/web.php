@@ -19,7 +19,7 @@ Route::get('/', function () {
 })->middleware('auth');
 
 Auth::routes([
-    'register' => true
+    'register' => false
 ]);
 
 //Admin Routes
