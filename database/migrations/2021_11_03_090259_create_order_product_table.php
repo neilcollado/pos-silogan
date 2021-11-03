@@ -17,7 +17,7 @@ class CreateOrderProductTable extends Migration
             $table->unsignedInteger('order_id');
             $table->foreign('order_id')->references('order_id')->on('order')->onDelete('cascade');
             $table->unsignedInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('product_id')->references('product_id')->on('products')->onDelete('cascade');
             $table->integer('quantity');
         });
     }
@@ -29,6 +29,6 @@ class CreateOrderProductTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order');
+        Schema::dropIfExists('order_product');
     }
 }

@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\OrderController as ControllersOrderController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,8 +29,9 @@ Auth::routes([
 Route::middleware('auth')->name('admin.')->group(function(){
     Route::resource('/products', ProductsController::class);
     Route::resource('/users', UserController::class)->middleware('isAdmin');
+    Route::resource('/orders', UserController::class);
 });
 
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/orders', [App\Http\Controllers\OrderController::class, 'index'])->name('order');
+
