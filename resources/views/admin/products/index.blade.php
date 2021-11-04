@@ -16,8 +16,8 @@
             <thead>
             <tr>
                 <th scope="col">ID#</th>
-                <th scope="col">Product Name</th>
-                <th scope="col">Product Description</th>
+                <th scope="col" class="col-md-2">Product Name</th>
+                <th scope="col" class="col-md-4">Product Description</th>
                 <th scope="col">UnitPrice</th>
                 <th scope="col">Available</th>
                 @can('is-admin')
@@ -33,11 +33,11 @@
                     <td>{{ $product->ProdDescription }}</td>
                     <td>{{ $product->UnitPrice }}</td>
                     <td>{{ $product->isAvailable }}</td>
-                    @can('is-admin')
                     <td>
-                        <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-sm btn-warning" role="button">Edit</a>
-                        
                         <a href="{{ route('admin.products.show', $product->id) }}" class="btn btn-sm btn-primary">View</a>
+                        @can('is-admin')
+                        
+                        <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-sm btn-warning" role="button">Edit</a>
 
                         <button type="button" class="btn btn-sm btn-danger"
                             onclick="event.preventDefault();

@@ -17,7 +17,7 @@ class ProductsController extends Controller
 
     public function __construct()
     {
-        $this->middleware('isAdmin')->except('index');
+        $this->middleware('isAdmin')->except('index','show');
     }
 
     public function index()

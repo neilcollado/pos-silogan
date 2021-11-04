@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\OrdersController;
+use App\Http\Controllers\Admin\OrderHistoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,12 +21,18 @@ Route::get('/', function () {
 })->middleware('auth');
 
 Auth::routes([
-    'register' => false
+    'register' => true
 ]);
 
 //Admin Routes
 Route::middleware('auth')->name('admin.')->group(function(){
     Route::resource('/products', ProductsController::class);
+    //extra methods for orders
+    Route::get('/orders/{id}/cancel', [OrdersController::class, 'cancel'])->name('orders.cancel');
+    Route::get('/orders/{id}/complete', [OrdersController::class, 'complete'])->name('orders.complete');
+
+    Route::resource('/orders', OrdersController::class);
+    Route::resource('/orderHistory', OrderHistoryController::class);
     Route::resource('/users', UserController::class)->middleware('isAdmin');
 });
 
