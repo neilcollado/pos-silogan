@@ -18,6 +18,7 @@ class CreateOrdersTable extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->enum('status', ['pending','cancelled','completed']);
             $table->enum('type', ['dine-in','take-out']);
+            $table->float('Total', 8, 2)->nullable();
             $table->timestamps();
         });
     }

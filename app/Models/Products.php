@@ -9,4 +9,8 @@ class Products extends Model
 {
     use HasFactory;
     public $timestamps = false;
+
+    public function orders() {
+        return $this->belongsToMany(Orders::class, "order_product")->withTimeStamps()->withPivot('Quantity');
+    }
 }

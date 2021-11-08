@@ -9,4 +9,8 @@ class Orders extends Model
 {
     use HasFactory;
     protected $fillable = ['status'];
+    
+    public function products() {
+        return $this->belongsToMany(Products::class, "order_product")->withTimeStamps()->withPivot('Quantity');
+    }
 }

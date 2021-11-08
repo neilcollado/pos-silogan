@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Orders;
+use App\Models\Products;
 
 class OrderHistoryController extends Controller
 {
@@ -49,7 +50,19 @@ class OrderHistoryController extends Controller
      */
     public function show($id)
     {
-        return view('admin.order_history.show', ['order' => Orders::findOrFail($id)]);
+
+        $orders = Orders::find($id);
+        // $products = Products::all();
+        // $orders->products()->attach($products);
+        
+        $orders->Total = 0;
+        foreach($orders->products as $products) {
+            $orders->Total += $products->UnitPrice;
+        }
+        
+        $orders->save();
+
+        return view('admin.order_history.show')->with('orders', $orders);
     }
 
     /**

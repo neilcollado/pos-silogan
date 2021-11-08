@@ -6,9 +6,7 @@
     <div class="row">
         <div class="col-12">
         <h2 class="mb-3 float-left">Order Listing</h2>
-        @can('is-admin')
-            <a href="{{ route('admin.orders.create') }}" class="btn btn-md btn-success float-right" role="button">Add Order</a>
-        @endcan
+        <a href="{{ route('admin.orders.create') }}" class="btn btn-md btn-success float-right" role="button">Add Order</a>
         </div>
     </div>
     <div class="card px-2">
