@@ -15,6 +15,26 @@
                     @endif
 
                     You are logged in {{ Auth::user()->name }} !
+                    
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Sales</th>
+                            <th scope="col">Today</th>
+                            <th scope="col">Month</th>
+                            <th scope="col">Year</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td></td>
+                            <td>{{ $salesT }} PHP</td>
+                            <td>{{ $salesM }} PHP</td>
+                            <td>{{ $salesY }} PHP</td>
+                          </tr>    
+                        </tbody>
+                      </table>
+
                 </div>
             </div>
         </div>

@@ -9,7 +9,9 @@
     <thead>
      
       <tr>
-        <th scope="col">Order #{{ $orders->id }}</th>
+        <th scope="col">Order ID: {{ $orders->id }}</th>
+        <th scope="col">Order No: {{ $orders->orderNo }}</th>
+        <th scope="col">Employee: {{ $orders->emp_name }}</th>
         <th scope="col">Product Name</th>
         <th scope="col">Quantity</th>
         <th scope="col">Unit Price</th>
@@ -20,6 +22,8 @@
       @foreach ($orders->products as $product)
         <tr>
           <th scope="row"></th>
+          <td></td>
+          <td></td>
           <td>{{ $product->ProdName }}</td>
           <td>{{ $product->pivot->Quantity }}</td>
           <td>{{ $product->UnitPrice }}</td>
@@ -31,6 +35,8 @@
           <th scope="row">
            
           </th>
+          <td></td>
+          <td></td>
           <td></td>
           <td></td>
           <td><h4>TOTAL</h4></td>

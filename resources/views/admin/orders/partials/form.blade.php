@@ -11,6 +11,20 @@
 </div>
 
 <div class="form-group row mb-0">
+
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name="orderType" value="dine-in" checked>
+    <label class="form-check-label">
+      Dine-in
+    </label>
+  </div>
+  <div class="form-check ml-3">
+    <input class="form-check-input" type="radio" name="orderType" value="take-out">
+    <label class="form-check-label">
+      Take-out
+    </label>
+  </div>
+
   <table class="table">
     <thead>
       <tr>
@@ -22,10 +36,10 @@
     </thead>
     <tbody id="orderList">
       <tr>
-        <th scope="row">1</th>
+        <th scope="row">{{ $products[0]->id }}</th>
         <td>
-          <input type="text" name="orders[]" value="Porksilog" disabled>
-          <input type="hidden" name="orders[]" value="1">
+          <input type="text" name="orders[]" value="{{ $products[0]->ProdName }}" disabled>
+          <input type="hidden" name="orders[]" value="{{ $products[0]->id }}">
         </td>
         <td>
           <input type="number" name="orderQty[]" id="orderQty1" value="5" readonly="readonly">

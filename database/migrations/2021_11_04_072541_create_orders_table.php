@@ -15,7 +15,9 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->integer('orderNo');
             $table->foreignId('user_id')->constrained('users');
+            $table->string('emp_name');
             $table->enum('status', ['pending','cancelled','completed']);
             $table->enum('type', ['dine-in','take-out']);
             $table->float('Total', 8, 2)->nullable();

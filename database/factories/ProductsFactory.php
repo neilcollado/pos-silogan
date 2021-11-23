@@ -22,9 +22,13 @@ class ProductsFactory extends Factory
      */
     public function definition()
     {
+        $products = ['Porksilog', 'BurgerSteaksilog','Sardinesilog'];
+
+        // unique()->
+
         return [
             'category_id' => $this->faker->numberBetween($min = 1, $max = 3),
-            'ProdName' => $this->faker->name(),
+            'ProdName' => $this->faker->randomElement($products),
             'UnitPrice' => $this->faker->numberBetween($min = 10, $max = 100),
             'ProdDescription' => $this->faker->text,
             'isAvailable' => $this->faker->numberBetween($min = 0, $max = 1),
