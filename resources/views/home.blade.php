@@ -15,7 +15,7 @@
                     @endif
 
                     You are logged in {{ Auth::user()->name }} !
-                    
+                    @can('is-admin')
                     <table class="table">
                         <thead>
                           <tr>
@@ -34,7 +34,7 @@
                           </tr>    
                         </tbody>
                       </table>
-
+                    @endcan
                 </div>
             </div>
         </div>
