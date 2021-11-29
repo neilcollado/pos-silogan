@@ -59,7 +59,7 @@ class TransactionsController extends Controller
         
         $t = Transactions::all()->last();
         $o = Orders::findOrFail($orderID);
-        $o->update(['status' => 'completed']);
+        $o->update(['status' => 'paid']);
 
         return view('admin.transactions.show')->with('transaction', $t)->with('orders', $o);
     }

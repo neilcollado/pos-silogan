@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
   @include('partials.alerts')
-  <a href="javascript:history.back()" class="btn btn-md btn-primary">Back To Order Listing</a>
+  <a href="{{ route('admin.orders.index') }}" class="btn btn-md btn-primary">Back To Order Listing</a>
 
   <div class="d-flex justify-content-between mt-3">
     <div class="col-md-9">

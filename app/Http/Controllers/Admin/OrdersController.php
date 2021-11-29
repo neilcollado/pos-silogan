@@ -19,9 +19,11 @@ class OrdersController extends Controller
 
     public function index()
     {
-        $orders = Orders::where('status','pending')->paginate(10);
+        $to_be_paid = Orders::where('status','pending')->paginate(10);
         
-        return view('admin.orders.index')->with('orders', $orders);
+        $pending = Orders::where('status','paid')->paginate(10);
+
+        return view('admin.orders.index')->with('pending', $to_be_paid)->with('paid', $pending);
     }
 
     /**
@@ -158,6 +160,13 @@ class OrdersController extends Controller
     public function cancel($id) {
         $order = Orders::findOrFail($id);
         $order->update(['status' => 'cancelled']);
+        
+        return redirect(route('admin.orders.index'));
+    }
+
+    public function complete($id) {
+        $order = Orders::findOrFail($id);
+        $order->update(['status' => 'completed']);
         
         return redirect(route('admin.orders.index'));
     }
