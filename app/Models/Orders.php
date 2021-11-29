@@ -17,4 +17,8 @@ class Orders extends Model
     public function user() {
         return $this->belongsTo(User::class, 'o_id');
     }
+
+    public function transactions() {
+        return $this->belongsTo(Transactions::class, 't_id');
+    }
 }

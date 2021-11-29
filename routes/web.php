@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Admin\OrderHistoryController;
+use App\Http\Controllers\Admin\TransactionsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,8 +31,8 @@ Route::middleware('auth')->name('admin.')->group(function(){
     
     //extra methods for orders
     Route::get('/orders/{id}/cancel', [OrdersController::class, 'cancel'])->name('orders.cancel');
-    Route::get('/orders/{id}/complete', [OrdersController::class, 'complete'])->name('orders.complete');
 
+    Route::resource('/transactions',TransactionsController::class);
     Route::resource('/orders', OrdersController::class);
     Route::resource('/orderHistory', OrderHistoryController::class);
     Route::resource('/users', UserController::class)->middleware('isAdmin');

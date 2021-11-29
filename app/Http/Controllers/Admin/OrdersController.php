@@ -103,8 +103,8 @@ class OrdersController extends Controller
         $orders->save();
 
         $request->session()->flash('success', 'Created Successfully');
-        return redirect(route('admin.orders.index'));   
-
+        // return redirect(route('admin.orders.index'));   
+        return view('admin.orders.show')->with('orders', $orders);
     }
 
     /**
@@ -116,16 +116,7 @@ class OrdersController extends Controller
     public function show($id)
     {
         $orders = Orders::find($id);
-        // $products = Products::all();
-        // $orders->products()->attach($products);
-        
-        // $orders->Total = 0;
-        // foreach($orders->products as $products) {
-        //     $orders->Total += $products->UnitPrice;
-        //     $products->pivot->Quantity = 2;
-        // }
-       
-        // $orders->save();
+
 
         return view('admin.orders.show')->with('orders', $orders);
     }
@@ -170,11 +161,5 @@ class OrdersController extends Controller
         
         return redirect(route('admin.orders.index'));
     }
-
-    public function complete($id) {
-        $order = Orders::findOrFail($id);
-        $order->update(['status' => 'completed']);
-          
-        return redirect(route('admin.orders.index'));
-    }
+    
 }

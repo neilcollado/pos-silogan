@@ -4,11 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Orders;
-use App\Models\Products;
 use App\Models\Transactions;
+use App\Models\Orders;
 
-class OrderHistoryController extends Controller
+class TransactionsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +16,9 @@ class OrderHistoryController extends Controller
      */
     public function index()
     {
-        $orders = Orders::where('status','cancelled')->orWhere('status','completed')->paginate(10);
+        $transactions = Transactions::all();
 
-        return view('admin.order_history.index',['orders' => $orders]);
+        return view('admin.transactions.index')->with('transactions', $transactions);
     }
 
     /**
@@ -40,7 +39,29 @@ class OrderHistoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $orderID = request('orderID');
+        $transaction = new Transactions;
+
+        $payment = request('payment');
+        $total = request('total');
+        
+        $transaction->orders_id = $orderID;
+        $transaction->total = $total;
+        $transaction->payment = $payment;
+        $transaction->change = ($payment - $total);
+
+        if($transaction->change < 0) {
+            $request->session()->flash('failed', 'Payment Amount Invalid!');
+            return redirect(route('admin.orders.show', $transaction->orders_id));
+        }
+
+        $transaction->save();
+        
+        $t = Transactions::all()->last();
+        $o = Orders::findOrFail($orderID);
+        $o->update(['status' => 'completed']);
+
+        return view('admin.transactions.show')->with('transaction', $t)->with('orders', $o);
     }
 
     /**
@@ -51,19 +72,13 @@ class OrderHistoryController extends Controller
      */
     public function show($id)
     {
+        $transaction = Transactions::findOrFail($id);
+        $orderID = $transaction->orders_id;
+        $order = Orders::findOrFail($orderID);
 
-        $orders = Orders::find($id);
-        // $products = Products::all();
-        // $orders->products()->attach($products);
-        
-        $orders->Total = 0;
-        foreach($orders->products as $products) {
-            $orders->Total += $products->UnitPrice;
-        }
-        
-        $orders->save();
+        // dd($orderID);
 
-        return view('admin.order_history.show')->with('orders', $orders);
+        return view('admin.transactions.show')->with('transaction', $transaction)->with('orders', $order);
     }
 
     /**

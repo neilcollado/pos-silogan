@@ -4,7 +4,6 @@
 <div class="container">
   <a href="javascript:history.back()" class="btn btn-md btn-primary">Back To Order Listing</a>
 
-  
   <table class="table">
     <thead>
      

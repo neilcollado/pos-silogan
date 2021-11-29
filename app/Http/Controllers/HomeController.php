@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 Use \Carbon\Carbon;
 use App\Models\Orders;
+use App\Models\Transactions; 
 
 class HomeController extends Controller
 {
@@ -26,23 +27,20 @@ class HomeController extends Controller
     public function index()
     {
         //daily sales
-        $ordersD = Orders::where('created_at', '>=', Carbon::today())
-            ->where('created_at', '<', Carbon::tomorrow())
-            ->where('status','completed')->get();
+        $ordersD = Transactions::where('created_at', '>=', Carbon::today())
+            ->where('created_at', '<', Carbon::tomorrow())->get();
 
         //set month paramenter -- monthly sales
         $month_start = Carbon::now()->startOfMonth();
         $month_end = Carbon::now()->endOfMonth();
-        $ordersM = Orders::where('created_at', '>=', $month_start)
-            ->where('created_at', '<', $month_end)
-            ->where('status','completed')->get();
+        $ordersM = Transactions::where('created_at', '>=', $month_start)
+            ->where('created_at', '<', $month_end)->get();
 
         //set year parameter -- yearly sales
         $year_start = Carbon::now()->startOfYear();
         $year_end = Carbon::now()->endOfYear();
-        $ordersY = Orders::where('created_at', '>=', $year_start)
-            ->where('created_at', '<', $year_end)
-            ->where('status','completed')->get();
+        $ordersY = Transactions::where('created_at', '>=', $year_start)
+            ->where('created_at', '<', $year_end)->get();
 
         $salesYesterday = 0;
         $dailySale = 0;
@@ -51,15 +49,16 @@ class HomeController extends Controller
 
         //calculate daily sales
         foreach ($ordersD as $order) {
-            $dailySale += $order->Total;
+            $dailySale += $order->total;   
         }
+
         //calculate monthly sales
         foreach ($ordersM as $order) {
-            $monthlySale += $order->Total;
+            $monthlySale += $order->total;
         }
         //calculate yearly sales
         foreach ($ordersY as $order) {
-            $yearlySale += $order->Total;
+            $yearlySale += $order->total;
         }
 
         return view('home')->with('salesT', $dailySale)->with('salesM', $monthlySale)->with('salesY', $yearlySale);
