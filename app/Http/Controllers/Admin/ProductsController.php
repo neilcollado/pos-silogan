@@ -45,8 +45,6 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        // $product = Products::create($request->except(['_token']));
-
         $product = new Products;
         $product->ProdName = request('prodname');
         $product->ProdDescription = request('desc');
@@ -106,6 +104,8 @@ class ProductsController extends Controller
         $product->ProdDescription = request('desc');
         $product->UnitPrice = request('unitprice');
         $product->category_id = request('category');
+        $product->isAvailable = request('isAvailable');
+
         if($request->hasFile('prodpicture')) {
             $file = $request->file('prodpicture');
             $extension = $file->getClientOriginalExtension();

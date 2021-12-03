@@ -67,6 +67,40 @@
 </div>
 
 <div class="form-group row">
+    @isset($product)
+        @if ($product->isAvailable == 1)
+        <div class="form-check">   
+            <input class="form-check-input" type="radio" name="isAvailable" id="isAvailable1" value="1" checked>
+            <label class="form-check-label" for="isAvailable1">
+                Available
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="isAvailable" id="isAvailable1" value="0">
+            <label class="form-check-label" for="isAvailable1">
+                Unavailable
+            </label>
+        </div>
+        @else
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="isAvailable" id="isAvailable1" value="1">
+            <label class="form-check-label" for="isAvailable1">
+                Available
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="isAvailable" id="isAvailable1" value="0" checked>
+            <label class="form-check-label" for="isAvailable1">
+                Unavailable
+            </label>
+        </div>
+        @endif
+    @endisset
+</div>
+
+
+
+<div class="form-group row">
     <label for="prodpicture" class="col-md-4 col-form-label text-md-right" >Upload</label>
     <div class="col-md-6">
         <input id="prodpicture" type="file" class="btn btn-sm @error('prodpicture') is-invalid @enderror" 

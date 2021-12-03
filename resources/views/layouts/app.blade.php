@@ -47,7 +47,7 @@
                         @endcan
                         <a href="{{ route('admin.products.index') }}" style="color:white" class="text-sm text-gray-700 dark:text-gray-500 underline pr-5">Products</a>
                         <a href="{{ route('admin.orders.index') }}" style="color:white" class="text-sm text-gray-700 dark:text-gray-500 underline pr-5">Orders</a>
-                        <a href="{{ route('admin.orderHistory.index') }}" style="color:white" class="text-sm text-gray-700 dark:text-gray-500 underline pr-5">Order History</a>
+                        <a href="{{ route('admin.transactions.index') }}" style="color:white" class="text-sm text-gray-700 dark:text-gray-500 underline pr-5">Transactions</a>
                        @endauth
                     </ul>
 
