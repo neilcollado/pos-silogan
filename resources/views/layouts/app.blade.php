@@ -21,11 +21,13 @@
 
     <!-- Jquert -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link href="css/style.css" rel="stylesheet" />
 </head>
-<body>
+<body style="background: linear-gradient(to right, green, yellow)">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
+        <nav class="navbar navbar-expand-md navbar-light shadow-sm">
+            <div class="container" >
                 @guest
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -35,17 +37,17 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent" >
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                        @auth
-                        <a href="{{ url('/') }}" class="text-sm text-gray-700 dark:text-gray-500 underline pr-2">Home</a>
+                        <a href="{{ url('/') }}" style="color:white" class="text-sm text-gray-700 dark:text-gray-500 underline pr-5">Home</a>
                         @can('is-admin')
-                            <a href="{{ route('admin.users.index') }}" class="text-sm text-gray-700 dark:text-gray-500 underline pr-2">Employees</a>
+                        <a href="{{ route('admin.users.index') }}" style="color:white" class="text-sm text-gray-700 dark:text-gray-500 underline pr-5">Employees</a>
                         @endcan
-                        <a href="{{ route('admin.products.index') }}" class="text-sm text-gray-700 dark:text-gray-500 underline pr-2">Products</a>
-                        <a href="{{ route('admin.orders.index') }}" class="text-sm text-gray-700 dark:text-gray-500 underline pr-2">Orders</a>
-                        <a href="{{ route('admin.transactions.index') }}" class="text-sm text-gray-700 dark:text-gray-500 underline pr-2">Transactions</a>
+                        <a href="{{ route('admin.products.index') }}" style="color:white" class="text-sm text-gray-700 dark:text-gray-500 underline pr-5">Products</a>
+                        <a href="{{ route('admin.orders.index') }}" style="color:white" class="text-sm text-gray-700 dark:text-gray-500 underline pr-5">Orders</a>
+                        <a href="{{ route('admin.orderHistory.index') }}" style="color:white" class="text-sm text-gray-700 dark:text-gray-500 underline pr-5">Order History</a>
                        @endauth
                     </ul>
 
