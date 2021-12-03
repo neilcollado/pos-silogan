@@ -1,32 +1,49 @@
 @extends('layouts.app')
 
 @section('content')
-  <div class="container mt-5">
-    <a href="javascript:history.back()" class="btn btn-md btn-primary">Back To Product Listing</a>
-    <div class="card mb-3 mt-3" style="max-width: 540px;">
-      <div class="row g-0">
-        <div class="col-md-4">
-          <img src="{{ asset('uploads/products/' . $product->ProdPicture) }}" class="img-fluid rounded-start" alt="...">
-          
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title">{{ $product->ProdName }}</h5>
-            <p class="card-text">{{ $product->ProdDescription }}</p>
-            <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-sm btn-warning" role="button">Edit</a>
-            <button type="button" class="btn btn-sm btn-danger"
-              onclick="event.preventDefault();
-              document.getElementById('delete-product-from-{{ $product->id }}').submit()">
-              Delete
-            </button>
+<head>
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
 
-            <form id="delete-product-from-{{ $product->id }}" action="{{ route('admin.products.destroy', $product->id) }}" method="POST">
-                @csrf
-                @method('DELETE')
-            </form>
+  <!-- Custom styles for this template -->
+  <link href="../css/style.css" rel="stylesheet" />
+</head>
+<section class="food_section layout_padding-bottom">
+    <div class="container">
+    <a href="javascript:history.back()" class="btn btn-md btn-primary">Back To Product Listing</a>
+      <div class="filters-content">
+        <div class="row grid">
+          <div class="col-sm-6 col-lg-4">
+            <div class="box">
+              <div>
+                <div class="img-box">
+                  <img src="{{ asset('uploads/products/' . $product->ProdPicture) }}" alt="">
+                </div>
+                <div class="detail-box">
+                  <h5>{{ $product->ProdName }}</h5>
+                  <p>{{ $product->ProdDescription }}</p>
+                  <div class="options">
+                    <h6>
+                     
+                    </h6>
+                    <a href="{{ route('admin.products.edit', $product->id) }}" style="color:black">Edit</a>
+                    <button type="button" class="btn btn-sm btn-danger"
+                      onclick="event.preventDefault();
+                      document.getElementById('delete-product-from-{{ $product->id }}').submit()">
+                      Delete
+                    </button>
+
+                    <form id="delete-product-from-{{ $product->id }}" action="{{ route('admin.products.destroy', $product->id) }}" method="POST">
+                      @csrf
+                      @method('DELETE')
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 @endsection
