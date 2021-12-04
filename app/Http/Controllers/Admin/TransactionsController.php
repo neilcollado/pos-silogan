@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Transactions;
 use App\Models\Orders;
+Use \Carbon\Carbon;
 
 class TransactionsController extends Controller
 {
@@ -16,7 +17,7 @@ class TransactionsController extends Controller
      */
     public function index()
     {
-        $transactions = Transactions::all();
+        $transactions = Transactions::all()->reverse();
 
         return view('admin.transactions.index')->with('transactions', $transactions);
     }
@@ -61,7 +62,9 @@ class TransactionsController extends Controller
         $o = Orders::findOrFail($orderID);
         $o->update(['status' => 'paid']);
 
-        return view('admin.transactions.show')->with('transaction', $t)->with('orders', $o);
+        $date = $t->created_at->toFormattedDateString();
+
+        return view('admin.transactions.show')->with('transaction', $t)->with('orders', $o)->with('date',$date);
     }
 
     /**
@@ -75,10 +78,14 @@ class TransactionsController extends Controller
         $transaction = Transactions::findOrFail($id);
         $orderID = $transaction->orders_id;
         $order = Orders::findOrFail($orderID);
-
+        $date = $transaction->created_at->toFormattedDateString();
+        
         // dd($orderID);
 
-        return view('admin.transactions.show')->with('transaction', $transaction)->with('orders', $order);
+        return view('admin.transactions.show')
+        ->with('transaction', $transaction)
+        ->with('orders', $order)
+        ->with('date', $date);
     }
 
     /**

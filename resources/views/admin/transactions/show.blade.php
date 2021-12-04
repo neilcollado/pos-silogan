@@ -23,7 +23,7 @@
           <div class="invoice-header">
              <div class="invoice-from">
                 <address class="m-t-5 m-b-5">
-                   <strong class="text-inverse">Twitter, Inc.</strong><br>
+                   <strong class="text-inverse">Silog, Inc.</strong><br>
                    Street Address<br>
                    City, Zip Code<br>
                    Phone: (123) 456-7890<br>
@@ -32,7 +32,7 @@
              </div>
              <div class="invoice-date">
                 <small>Invoice / July period</small>
-                <div class="date text-inverse m-t-5">August 3,2012</div>
+                <div class="date text-inverse m-t-5">{{ $date }}</div>
                 <div class="invoice-detail">
                    #0000123DSS<br>
                    Services Product

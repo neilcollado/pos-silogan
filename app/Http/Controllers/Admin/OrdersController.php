@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Orders;
 use App\Models\Products;
 use App\Models\User;
+Use \Carbon\Carbon;
 use Auth;
 
 class OrdersController extends Controller
@@ -45,68 +46,69 @@ class OrdersController extends Controller
      */
     public function store(Request $request)
     {   
-        //set OrderNo
-        $orderNo = Orders::select('orderNo')->pluck('orderNo')->last();
-        if($orderNo >= 15) {
-            //given the shop only has 15 seats
-            $orderNo = 1;
-        } else {
-            $orderNo++;
-        }
-
-        //create new order
-        $newOrder = new Orders;
-        $newOrder->user_id = Auth::id();
+       //set OrderNo
+       $orderNo = Orders::select('orderNo')->pluck('orderNo')->last();
         
-        //get employee name
-        $emp = User::findOrFail($newOrder->user_id);
-        $newOrder->emp_name = $emp->name;
-        $newOrder->orderNo = $orderNo;
-        $newOrder->status = 'pending';
-        $newOrder->type = request('orderType');
+       $today = Carbon::now();
+       if($today->isStartOfDay()){
+           $orderNo = 1;
+       } else {
+           $orderNo++;
+       }
 
-        $prodId = request('orders');
+       //create new order
+       $newOrder = new Orders;
+       $newOrder->user_id = Auth::id();
+       
+       //get employee name
+       $emp = User::findOrFail($newOrder->user_id);
+       $newOrder->emp_name = $emp->name;
+       $newOrder->orderNo = $orderNo;
+       $newOrder->status = 'pending';
+       $newOrder->type = request('orderType');
 
-        //check if there is a product in order
-        if($prodId == null) {
-            $request->session()->flash('failed', 'Order Failed: Need to input a product');
-            return redirect(route('admin.orders.index'));
-        }
+       $prodId = request('orders');
 
-        $newOrder->save();
+       //check if there is a product in order
+       if($prodId == null) {
+           $request->session()->flash('failed', 'Order Failed: Need to input a product');
+           return redirect(route('admin.orders.index'));
+       }
 
-        //retrieve last order
-        $orders = Orders::all()->last();
-        $orders->Total = 0;
-        $queueCount = request('queueCount');
+       $newOrder->save();
 
-        
-        $prodQty = request('orderQty');
+       //retrieve last order
+       $orders = Orders::all()->last();
+       $orders->Total = 0;
+       $queueCount = request('queueCount');
 
-        //attach the product
-        
-        foreach($prodId as $id) {
-            $product = Products::findOrFail($id);
-            $orders->products()->attach($product);
-        }
+       
+       $prodQty = request('orderQty');
 
-        //add the quantity per item
-        $count = count($prodId);
-        for($i=0; $i < $count; $i++) {
-            $orders->products[$i]->pivot->Quantity = $prodQty[$i];
-            $orders->products[$i]->pivot->save();
-        }
-        
-        //set the total
-        foreach($orders->products as $products) {
-            $orders->Total += ($products->UnitPrice * $products->pivot->Quantity);
-        }
-        
-        $orders->save();
+       //attach the product
+       
+       foreach($prodId as $id) {
+           $product = Products::findOrFail($id);
+           $orders->products()->attach($product);
+       }
 
-        $request->session()->flash('success', 'Created Successfully');
-        // return redirect(route('admin.orders.index'));   
-        return view('admin.orders.show')->with('orders', $orders);
+       //add the quantity per item
+       $count = count($prodId);
+       for($i=0; $i < $count; $i++) {
+           $orders->products[$i]->pivot->Quantity = $prodQty[$i];
+           $orders->products[$i]->pivot->save();
+       }
+       
+       //set the total
+       foreach($orders->products as $products) {
+           $orders->Total += ($products->UnitPrice * $products->pivot->Quantity);
+       }
+       
+       $orders->save();
+
+       $request->session()->flash('success', 'Created Successfully');
+       // return redirect(route('admin.orders.index'));   
+       return view('admin.orders.show')->with('orders', $orders);
     }
 
     /**
