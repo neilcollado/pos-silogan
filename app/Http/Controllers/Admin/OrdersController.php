@@ -47,10 +47,11 @@ class OrdersController extends Controller
     public function store(Request $request)
     {   
        //set OrderNo
+       $lastOrder = Orders::select('created_at')->pluck('created_at')->last();
        $orderNo = Orders::select('orderNo')->pluck('orderNo')->last();
         
-       $today = Carbon::now();
-       if($today->isStartOfDay()){
+       $today = Carbon::today();
+       if($today > $lastOrder ){
            $orderNo = 1;
        } else {
            $orderNo++;
