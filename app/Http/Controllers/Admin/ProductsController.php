@@ -22,9 +22,10 @@ class ProductsController extends Controller
 
     public function index()
     {
-        $products = Products::paginate(10);
+        $products = Products::latest()->paginate(10);
 
-        return view('admin.products.index', ['products' => $products]);
+        return view('admin.products.index')
+        ->with('products', $products);
     }
 
     /**

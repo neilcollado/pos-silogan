@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
             $table->string('ProdPicture')->nullable();
             $table->float('UnitPrice', 8, 2);
             $table->boolean('isAvailable')->default(1);
-            // $table->timestamps();
+            $table->timestamps();
         });
     }
 

@@ -13,19 +13,19 @@
       <table class="table">
           <thead>
           <tr>
-              <th scope="col">ID#</th>
-              <th scope="col">Name</th>
-              <th scope="col">Email</th>
-              <th scope="col">Actions</th>
+              <th scope="col" class="text-center">ID</th>
+              <th scope="col" class="text-center">Name</th>
+              <th scope="col" class="text-center">Email</th>
+              <th scope="col" class="text-center">Actions</th>
           </tr>
           </thead>
           <tbody>
           @foreach ($users as $user)    
               <tr>
-                  <th scope="row">{{ $user->id }}</th>
-                  <td>{{ $user->name }}</td>
-                  <td>{{ $user->email }}</td>
-                  <td>
+                  <th scope="row" class="text-center bg-info">{{ $user->id }}</th>
+                  <td class="text-center">{{ $user->name }}</td>
+                  <td class="text-center">{{ $user->email }}</td>
+                  <td class="text-center">
                       {{-- <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-sm btn-warning" role="button">Edit</a> --}}
                       
                       <a href="{{ route('admin.users.show', $user->id) }}" class="btn btn-sm btn-primary">View</a>

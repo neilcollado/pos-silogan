@@ -15,31 +15,36 @@
         <table class="table">
             <thead>
             <tr>
-                <th scope="col">ID#</th>
-                <th scope="col" class="col-md-2">Product Name</th>
-                <th scope="col" class="col-md-4">Product Description</th>
-                <th scope="col">UnitPrice</th>
-                <th scope="col">Available</th>
+                <th scope="col" class="col-md-1 text-center">ID</th>
+                <th scope="col" class="col-md-2 text-center">Product Name</th>
+                <th scope="col" class="col-md-6 text-center">Product Description</th>
+                <th scope="col" class="col-md-1 text-center">UnitPrice</th>
+                <th scope="col" class="col-md-1 text-center">Available</th>
                 @can('is-admin')
-                <th scope="col">Actions</th>
+                <th scope="col" class="col-md-1 text-center">Actions</th>
                 @endcan
             </tr>
             </thead>
             <tbody>
             @foreach ($products as $product)    
                 <tr>
-                    <th scope="row">{{ $product->id }}</th>
-                    <td>{{ $product->ProdName }}</td>
-                    <td>{{ $product->ProdDescription }}</td>
-                    <td>{{ $product->UnitPrice }}</td>
-                    <td>{{ $product->isAvailable }}</td>
-                    <td>
-                        <a href="{{ route('admin.products.show', $product->id) }}" class="btn btn-sm btn-primary">View</a>
+                    <th scope="row" class="text-center bg-info align-middle">{{ $product->id }}</th>
+                    <td class="text-center align-middle">{{ $product->ProdName }}</td>
+                    <td class="text-center align-middle">{{ $product->ProdDescription }}</td>
+                    <td class="text-center align-middle">{{ $product->UnitPrice }} PHP</td>
+                    @if ($product->isAvailable == 1)
+                        <td class="text-center bg-success text-black align-middle"><p><strong>Available</strong></p></td>
+                    @else
+                        <td class="text-center bg-danger text-white align-middle"><p>Unavailable</p></td>
+                    @endif
+                    
+                    <td class="text-center d-flex flex-column">
+                        <a href="{{ route('admin.products.show', $product->id) }}" class="btn btn-sm btn-primary mt-1">View</a>
                         @can('is-admin')
                         
-                        <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-sm btn-warning" role="button">Edit</a>
+                        <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-sm btn-warning mt-1" role="button">Edit</a>
 
-                        <button type="button" class="btn btn-sm btn-danger"
+                        <button type="button" class="btn btn-sm btn-danger mt-1"
                             onclick="event.preventDefault();
                             document.getElementById('delete-product-from-{{ $product->id }}').submit()">
                             Delete

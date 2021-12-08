@@ -3,8 +3,6 @@
 @section('content')
 <div class="container">
   @include('partials.alerts')
-  <a href="{{ route('admin.orders.index') }}" class="btn btn-md btn-primary">Back To Order Listing</a>
-
   <div class="d-flex justify-content-between mt-3">
     <div class="col-md-9">
       <table class="table">
@@ -48,7 +46,10 @@
             <label for="payment">Amount:</label>
             <input type="number" name="payment">
           </div>
-          <input type="submit" class="btn btn-success" value="Submit">
+          <div class="d-flex justify-content-around mb-2">
+            <input type="submit" class="btn btn-success" value="Submit">
+            <a href="{{ route('admin.orders.cancel', $orders->id) }}" class="btn btn-danger" role="button">Cancel</a>
+          </div>
         </div>
       </form>     
     </div>

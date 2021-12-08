@@ -8,7 +8,7 @@
                 <div class="card-header">Edit Employee</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('admin.users.update', $user->id)}}">
+                    <form method="POST" action="{{ route('admin.users.update', $user->id)}}" enctype="multipart/form-data">
                         @method('PATCH')
                         @include('admin.users.partials.form')
                     </form>

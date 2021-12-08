@@ -20,11 +20,9 @@ class OrdersController extends Controller
 
     public function index()
     {
-        $to_be_paid = Orders::where('status','pending')->paginate(10);
-        
-        $pending = Orders::where('status','paid')->paginate(10);
+        $paid = Orders::where('status','paid')->paginate(10);
 
-        return view('admin.orders.index')->with('pending', $to_be_paid)->with('paid', $pending);
+        return view('admin.orders.index')->with('paid', $paid);
     }
 
     /**
@@ -81,13 +79,9 @@ class OrdersController extends Controller
        //retrieve last order
        $orders = Orders::all()->last();
        $orders->Total = 0;
-       $queueCount = request('queueCount');
-
-       
        $prodQty = request('orderQty');
 
        //attach the product
-       
        foreach($prodId as $id) {
            $product = Products::findOrFail($id);
            $orders->products()->attach($product);
@@ -106,9 +100,8 @@ class OrdersController extends Controller
        }
        
        $orders->save();
-
        $request->session()->flash('success', 'Created Successfully');
-       // return redirect(route('admin.orders.index'));   
+
        return view('admin.orders.show')->with('orders', $orders);
     }
 
@@ -121,7 +114,6 @@ class OrdersController extends Controller
     public function show($id)
     {
         $orders = Orders::find($id);
-
 
         return view('admin.orders.show')->with('orders', $orders);
     }

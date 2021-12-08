@@ -7,12 +7,10 @@
       <div class="card-body">
         {{-- Add order --}}
         <div class="input-group mb-3" id="inputField0">
-          <button class="btn btn-md btn-success mb-3" id="addOrder" type="button">+</button>
           <select class="custom-select inputGroup" id="order">
-            <option selected>Choose...</option>
             @include('admin.orders.partials.loop');
           </select>
-          <input class="col-2" type="number" min="1" value="1" id="orderQty">
+          <button class="btn btn-md btn-success mb-3 mx-2 text-center" id="addOrder" type="button">ADD</button>
         </div>
     
         <div class="form-group row mb-0 px-3">
@@ -32,10 +30,10 @@
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">ID#</th>
-                <th scope="col">Product</th>
-                <th scope="col">Qty</th>
-                <th scope="col">Action</th>
+                <th scope="col" class="text-center">ID#</th>
+                <th scope="col" class="text-center">Product</th>
+                <th scope="col" class="text-center">Qty</th>
+                <th scope="col" class="text-center">Action</th>
               </tr>
             </thead>
             <tbody id="orderList">
@@ -43,7 +41,6 @@
             </tbody>
           </table>
         </div>
-    
         <input type="hidden" name="queueCount" id="queueCount" value="1">
       </div>
     </div>
@@ -51,7 +48,8 @@
 
   <div class="col-md-3">
     <div class="d-flex justify-content-center">
-      <button type="submit" class="btn btn-primary">Create Order</button>
+      <button type="submit" class="btn btn-primary mx-3">Create Order</button>
+      <a href="{{ route('admin.orders.index') }}" type="button" class="btn btn-danger">Cancel</a>
     </div>
   </div>
 </div>

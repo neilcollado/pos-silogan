@@ -12,32 +12,30 @@
         <table class="table">
             <thead>
             <tr>
-                <th scope="col">ID</th>
-                <th scope="col">OrderID</th>
-                <th scope="col">Total</th>
-                <th scope="col">Payment</th>
-                <th scope="col">Change</th>
-                <th scope="col">Created At</th>
-                <th scope="col">Actions</th>
+                <th scope="col" class="text-center">OrderNo</th>
+                <th scope="col" class="text-center">Total</th>
+                <th scope="col" class="text-center">Payment</th>
+                <th scope="col" class="text-center">Change</th>
+                <th scope="col" class="text-center">Created At</th>
+                <th scope="col" class="text-center">Actions</th>
             </tr>
             </thead>
             <tbody>
             @foreach ($transactions as $transaction)    
                 <tr>
-                    <th scope="row">{{ $transaction->id }}</th>
-                    <td>{{ $transaction->orders_id }}</td>
-                    <td>PHP {{ $transaction->total }}</td>
-                    <td>PHP {{ $transaction->payment }}</td>
-                    <td>PHP {{ $transaction->change }}</td>
-                    <td>{{ $transaction->created_at }}</td>
-                    <td>
+                    <th scope="row" class="text-center bg-info">{{ $orderNo[$count++] }}</th>
+                    <td class="text-center">{{ $transaction->total }} PHP</td>
+                    <td class="text-center">{{ $transaction->payment }} PHP</td>
+                    <td class="text-center">{{ $transaction->change }} PHP</td>
+                    <td class="text-center">{{ $transaction->created_at }}</td>
+                    <td class="text-center">
                         <a href="{{ route('admin.transactions.show', $transaction->id) }}" class="btn btn-sm btn-primary">View</a>
                     </td>
                 </tr>
             @endforeach    
             </tbody>
         </table>
-
+        {{ $transactions->links() }}
     </div>
 </div>
 @endsection

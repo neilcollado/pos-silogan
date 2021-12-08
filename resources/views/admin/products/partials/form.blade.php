@@ -68,41 +68,52 @@
 
 <div class="form-group row">
     @isset($product)
+        <label for="isAvailable" class="col-md-4 col-form-label text-md-right">Availability:</label>
         @if ($product->isAvailable == 1)
-        <div class="form-check">   
-            <input class="form-check-input" type="radio" name="isAvailable" id="isAvailable1" value="1" checked>
-            <label class="form-check-label" for="isAvailable1">
-                Available
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="isAvailable" id="isAvailable1" value="0">
-            <label class="form-check-label" for="isAvailable1">
-                Unavailable
-            </label>
+        <div class="col-md-6">
+            <div class="form-check">   
+                <input class="form-check-input" type="radio" name="isAvailable" id="isAvailable1" value="1" checked>
+                <label class="form-check-label" for="isAvailable1">
+                    Available
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="isAvailable" id="isAvailable1" value="0">
+                <label class="form-check-label" for="isAvailable1">
+                    Unavailable
+                </label>
+            </div>
         </div>
         @else
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="isAvailable" id="isAvailable1" value="1">
-            <label class="form-check-label" for="isAvailable1">
-                Available
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="isAvailable" id="isAvailable1" value="0" checked>
-            <label class="form-check-label" for="isAvailable1">
-                Unavailable
-            </label>
+        <div class="col-md-6">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="isAvailable" id="isAvailable1" value="1">
+                <label class="form-check-label" for="isAvailable1">
+                    Available
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="isAvailable" id="isAvailable1" value="0" checked>
+                <label class="form-check-label" for="isAvailable1">
+                    Unavailable
+                </label>
+            </div>
         </div>
         @endif
     @endisset
 </div>
 
-
-
 <div class="form-group row">
+    {{-- Product picture --}}
     <label for="prodpicture" class="col-md-4 col-form-label text-md-right" >Upload</label>
-    <div class="col-md-6">
+    @isset($product)
+    <div class="img-box">
+        <img src="{{ asset('uploads/products/' . $product->ProdPicture) }}" alt="product image" 
+        class="img-thumbnail w-75" style="max-width: 40vh">
+    </div>
+    @endisset
+
+    <div class="col-md-12 col-form-label text-center">
         <input id="prodpicture" type="file" class="btn btn-sm @error('prodpicture') is-invalid @enderror" 
         name="prodpicture">
         @error('prodpicture')
@@ -115,12 +126,11 @@
 
 <div class="form-group row mb-0">
     <div class="col-md-6 offset-md-4">
-        <button type="submit" class="btn btn-primary">
-            @if (isset($product))
-                Edit
-            @else
-                Add Product
-            @endif
-        </button>
+        @if (isset($product))
+        <button type="submit" class="btn btn-warning">Edit</button>    
+        @else
+        <button type="submit" class="btn btn-success">Add Product</button>   
+        @endif
+        <a href="{{ route('admin.products.index') }}" type="button" class="btn btn-danger">Cancel</a>
     </div>
 </div>

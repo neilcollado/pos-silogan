@@ -8,6 +8,7 @@ use App\Http\Requests\StoreEmployeeRequest;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Facades\Password;
+use Auth;
 
 class UserController extends Controller
 {
@@ -77,9 +78,10 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        // $user = User::find($id);
-        // return view('admin.users.edit', ['user' => $user]);
-        return redirect(route('admin.users.index'));
+        $user = User::findOrFail($id);
+
+        return view('admin.users.edit')
+        ->with('user', $user);
     }
 
     /**
@@ -95,9 +97,19 @@ class UserController extends Controller
         $user->name = request('name');
         $user->email = request('email');
         
+        if($request->hasFile('profilePicture')) {
+            $file = $request->file('profilePicture');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $file->move('uploads/users', $filename);
+            $user->profilePicture = $filename;
+        } else {
+            $user->profilePicture =  $user->profilePicture;
+        }
         $user->save();
+
         $request->session()->flash('success', 'Updated Successfully');
-        return redirect(route('admin.users.index'));
+        return redirect(route('admin.users.profile'));
     }
 
     /**
@@ -111,5 +123,14 @@ class UserController extends Controller
         User::destroy($id);
         $request->session()->flash('success', 'Deleted Successfully');
         return redirect(route('admin.users.index'));
+    }
+
+    public function profile()
+    {
+        $userID = Auth::id();
+        $user = User::findOrFail($userID);
+
+        return view('admin.users.profile')
+        ->with('user', $user);
     }
 }

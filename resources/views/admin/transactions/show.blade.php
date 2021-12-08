@@ -13,10 +13,9 @@
           <!-- begin invoice-company -->
           <div class="invoice-company text-inverse f-w-600">
              <span class="pull-right hidden-print">
-             <a href="javascript:;" class="btn btn-sm btn-white m-b-10 p-l-5"><i class="fa fa-file t-plus-1 text-danger fa-fw fa-lg"></i> Export as PDF</a>
              <a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-white m-b-10 p-l-5"><i class="fa fa-print t-plus-1 fa-fw fa-lg"></i> Print</a>
              </span>
-             Silogan ni Gianne
+             Silogan ni Gian
           </div>
           <!-- end invoice-company -->
           <!-- begin invoice-header -->
@@ -24,18 +23,19 @@
              <div class="invoice-from">
                 <address class="m-t-5 m-b-5">
                    <strong class="text-inverse">Silog, Inc.</strong><br>
-                   Street Address<br>
-                   City, Zip Code<br>
+                   Banilad Gov. M. Cuenco Avenue<br>
+                   Cebu City, Cebu, 6000<br>
                    Phone: (123) 456-7890<br>
                    Fax: (123) 456-7890
                 </address>
              </div>
              <div class="invoice-date">
-                <small>Invoice / July period</small>
                 <div class="date text-inverse m-t-5">{{ $date }}</div>
                 <div class="invoice-detail">
-                   #0000123DSS<br>
-                   Services Product
+                   <small>Transaction ID</small><br>
+                   #{{ $transaction->id }}<br>
+                   <small>Order Number</small><br>
+                   #{{ $orders->orderNo }}
                 </div>
              </div>
           </div>
@@ -76,20 +76,20 @@
                 <div class="invoice-price-left">
                    <div class="invoice-price-row">
                       <div class="sub-price">
-                         <small>SUBTOTAL</small>
-                         <span class="text-inverse">{{ $orders->Total }}</span>
+                         <small>Payment</small>
+                         <span class="text-inverse"> {{ $transaction->payment }} PHP</span>
                       </div>
                       <div class="sub-price">
                          <i class="fa fa-plus text-muted"></i>
                       </div>
                       <div class="sub-price">
-                         <small>Discount (5.4%)</small>
-                         <span class="text-inverse">{{ $orders->Total * 0.54 }} </span>
+                         <small>Change</small>
+                         <span class="text-inverse">{{ $transaction->change }} PHP</span>
                       </div>
                    </div>
                 </div>
                 <div class="invoice-price-right">
-                   <small>TOTAL</small> <span class="f-w-600">PHP {{ $orders->Total - ($orders->Total * 0.54) }}</span>
+                   <small>TOTAL</small> <span class="f-w-600">PHP {{ $orders->Total}}</span>
                 </div>
              </div>
              <!-- end invoice-price -->
@@ -99,7 +99,7 @@
           <div class="invoice-note">
              * Make all cheques payable to [Your Company Name]<br>
              * Payment is due within 30 days<br>
-             * If you have any questions concerning this invoice, contact  [Name, Phone Number, Email]
+             * If you have any questions concerning this invoice, contact Gian, 0925894752, siloganNiGian@gmail.com
           </div>
           <!-- end invoice-note -->
           <!-- begin invoice-footer -->
@@ -108,9 +108,9 @@
                 THANK YOU FOR YOUR BUSINESS
              </p>
              <p class="text-center">
-                <span class="m-r-10"><i class="fa fa-fw fa-lg fa-globe"></i> matiasgallipoli.com</span>
+                <span class="m-r-10"><i class="fa fa-fw fa-lg fa-globe"></i> siloganNiGian.com</span>
                 <span class="m-r-10"><i class="fa fa-fw fa-lg fa-phone-volume"></i> T:016-18192302</span>
-                <span class="m-r-10"><i class="fa fa-fw fa-lg fa-envelope"></i> rtiemps@gmail.com</span>
+                <span class="m-r-10"><i class="fa fa-fw fa-lg fa-envelope"></i> siloganNiGian@gmail.com</span>
              </p>
           </div>
           <!-- end invoice-footer -->

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Database\Eloquent\Collection;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Transactions;
@@ -17,9 +18,24 @@ class TransactionsController extends Controller
      */
     public function index()
     {
-        $transactions = Transactions::all()->reverse();
+        $transactions = Transactions::latest()->paginate(10);
+        $ordersID = Transactions::pluck('orders_id')->toArray();
+        
+        //get all orders model
+        $models = Orders::find($ordersID);
+        $sorted = array_flip($ordersID);
 
-        return view('admin.transactions.index')->with('transactions', $transactions);
+        foreach($models as $model)
+        {
+            $sorted[$model->id] = $model->orderNo;
+        }
+
+        $sorted = Collection::make(array_values($sorted));
+        $count = 0;
+      
+        return view('admin.transactions.index')
+        ->with('transactions', $transactions)
+        ->with('orderNo', $sorted)->with('count', $count);
     }
 
     /**
@@ -64,7 +80,10 @@ class TransactionsController extends Controller
 
         $date = $t->created_at->toFormattedDateString();
 
-        return view('admin.transactions.show')->with('transaction', $t)->with('orders', $o)->with('date',$date);
+        return view('admin.transactions.show')
+        ->with('transaction', $t)
+        ->with('orders', $o)
+        ->with('date',$date);
     }
 
     /**
@@ -80,8 +99,6 @@ class TransactionsController extends Controller
         $order = Orders::findOrFail($orderID);
         $date = $transaction->created_at->toFormattedDateString();
         
-        // dd($orderID);
-
         return view('admin.transactions.show')
         ->with('transaction', $transaction)
         ->with('orders', $order)
@@ -120,5 +137,5 @@ class TransactionsController extends Controller
     public function destroy($id)
     {
         //
-    }
+    }  
 }
