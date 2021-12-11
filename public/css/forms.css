@@ -26,6 +26,17 @@
   box-sizing: border-box;
   font-size: 14px;
 }
+.form select {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
 .form button {
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
@@ -55,12 +66,6 @@
 .form .register-form {
   display: none;
 }
-.container {
-  position: relative;
-  z-index: 1;
-  max-width: 300px;
-  margin: 0 auto;
-}
 .container:before, .container:after {
   content: "";
   display: block;
@@ -87,6 +92,9 @@
 }
 .container .info span .fa {
   color: #EF3B3A;
+}
+a:focus {
+  text-decoration: none;
 }
 body {
   background: #76b852; /* fallback for old browsers */

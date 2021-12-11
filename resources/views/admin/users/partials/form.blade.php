@@ -1,37 +1,21 @@
 @csrf
-<div class="form-group row">
-    <label for="name" class="col-md-4 col-form-label text-md-right">Name:</label>
-
-    <div class="col-md-6">
-        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" 
-        value="{{ old('name') }}@isset($user){{$user->name}}@endisset" required autocomplete="name" autofocus>
-
+<input placeholder="Name" type="text" class="@error('name') is-invalid @enderror" name="name" value="{{ old('name') }}@isset($user){{$user->name}}@endisset" required autocomplete="name" autofocus>
         @error('name')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror
-    </div>
-</div>
 
-<div class="form-group row">
-    <label for="email" class="col-md-4 col-form-label text-md-right">E-Mail Address:</label>
-
-    <div class="col-md-6">
-        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" 
-        value="{{ old('email') }}@isset($user){{$user->email}}@endisset" required autocomplete="email">
-
+<input placeholder="E-mail Address" type="email" class="@error('email') is-invalid @enderror" name="email" value="{{ old('email') }}@isset($user){{$user->email}}@endisset" required autocomplete="email">
         @error('email')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror
-    </div>
-</div>
 
 <div class="form-group row">
     {{-- Product picture --}}
-    <label for="profilePicture" class="col-md-4 col-form-label text-md-right" >Upload</label>
+    <label for="profilePicture" class="col-md-4 col-form-label text-md-right" >Image</label>
     @isset($user)
     <div class="img-box">
         <img src="{{ asset('uploads/users/' . $user->profilePicture) }}" alt="profile image" 
@@ -76,12 +60,11 @@
 
 <div class="form-group row mb-0">
     <div class="col-md-6 offset-md-4">
-        
         @if (isset($user))
-        <button type="submit" class="btn btn-warning">Edit</button>    
+        <button type="submit" class="btn btn-warning" style="white-space:nowrap; margin-left: -100px; height:50px">Edit</button>    
         @else
-        <button type="submit" class="btn btn-success">Register Employee</button>   
+        <button type="submit" class="btn btn-success" style="white-space:nowrap; margin-left: -100px; height:50px">Add Employee</button>   
         @endif
-        <a href="{{ route('admin.users.index') }}" type="button" class="btn btn-danger">Cancel</a>
+        <a href="{{ route('admin.users.index') }}" type="button" class="btn btn-danger" style="height:50px; padding-top:12px">Cancel</a>
     </div>
 </div>

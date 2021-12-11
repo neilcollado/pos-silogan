@@ -29,7 +29,7 @@
         <nav class="navbar navbar-expand-md navbar-light shadow-sm">
             <div class="container" >
                 @guest
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a href="{{ url('/') }}" style="color:white">
                     Silogan ni Gian
                 </a>
                 @endguest
@@ -57,13 +57,13 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link" href="{{ route('login') }}" style="color:black">{{ __('Login') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}" style="color:black">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
