@@ -5,7 +5,7 @@
   @include('partials.alerts')
   <div class="d-flex justify-content-between mt-3">
     <div class="col-md-9">
-      <table class="table">
+      <table class="table" style="background-color: white">
         <thead>
           <tr>
             <th scope="col">Order ID: {{ $orders->id }}</th>

@@ -14,7 +14,7 @@
       <div class="filters-content">
         <div class="row grid">
           <div class="col-sm-6 col-lg-4">
-            <div class="box">
+            <div class="box" style="margin: 20px -380px 0 380px">
               <div>
                 <div class="img-box">
                   <img src="" alt="">
