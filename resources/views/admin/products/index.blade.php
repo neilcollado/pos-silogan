@@ -18,6 +18,7 @@
                 <th scope="col" class="col-md-1 text-center">ID</th>
                 <th scope="col" class="col-md-2 text-center">Product Name</th>
                 <th scope="col" class="col-md-6 text-center">Product Description</th>
+                <th scope="col" class="col-md-1 text-center">Category</th>
                 <th scope="col" class="col-md-1 text-center">UnitPrice</th>
                 <th scope="col" class="col-md-1 text-center">Available</th>
                 @can('is-admin')
@@ -31,6 +32,17 @@
                     <th scope="row" class="text-center bg-info align-middle">{{ $product->id }}</th>
                     <td class="text-center align-middle">{{ $product->ProdName }}</td>
                     <td class="text-center align-middle">{{ $product->ProdDescription }}</td>
+                    @if ($product->category_id == 1)
+                        {{-- Silog --}}
+                        <td class="text-center align-middle">Silog</td>
+                    @elseif($product->category_id == 2)
+                        {{-- Beverage --}}
+                        <td class="text-center align-middle">Beverage</td>
+                    @else
+                        {{-- Add-On --}}
+                        <td class="text-center align-middle">Add-on</td>
+                    @endif
+
                     <td class="text-center align-middle">{{ $product->UnitPrice }} PHP</td>
                     @if ($product->isAvailable == 1)
                         <td class="text-center bg-success text-black align-middle"><p><strong>Available</strong></p></td>

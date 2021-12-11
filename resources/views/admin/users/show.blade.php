@@ -17,11 +17,19 @@
             <div class="box" style="margin: 20px -380px 0 380px">
               <div>
                 <div class="img-box">
-                  <img src="" alt="">
+                  <img src="{{ asset('uploads/users/' . $user->profilePicture) }}" class=" rounded" alt="Profile Picture">
                 </div>
                 <div class="detail-box">
-                  <h5>{{ $user->name }}</h5>
-                  <p>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <div class="d-flex justify-content-between">
+                    <h5>{{ $user->name }}</h5>
+                    <h5>ID: #{{ $user->id }}</h5>
+                  </div>
+                  <hr class="bg-white">
+                  <div class="d-flex justify-content-between">
+                    <p>Email: {{ $user->email }}</p>
+                    <p>Role: Employee</p>
+                  </div>
+                  
                   <div class="options">
                    {{-- <a href="{{ route('admin.users.edit', $user->id) }}" style="color:black">Edit</a>--}}
                     <button type="button" class="btn btn-sm btn-danger"

@@ -22,7 +22,7 @@ Route::get('/', function () {
 })->middleware('auth');
 
 Auth::routes([
-    'register' => true
+    'register' => false
 ]);
 
 //Admin Routes
@@ -37,7 +37,7 @@ Route::middleware('auth')->name('admin.')->group(function(){
     Route::resource('/transactions',TransactionsController::class);
     Route::resource('/orders', OrdersController::class);
     Route::resource('/orderHistory', OrderHistoryController::class);
-    Route::resource('/users', UserController::class)->middleware('isAdmin');
+    Route::resource('/users', UserController::class);
 });
 
 

@@ -20,11 +20,27 @@
                   <img src="{{ asset('uploads/products/' . $product->ProdPicture) }}" alt="">
                 </div>
                 <div class="detail-box">
-                  <h5>{{ $product->ProdName }}</h5>
+                  <div class="d-flex justify-content-between">
+                    <h5>{{ $product->ProdName }}</h5>
+                   
+                    <h5>
+                      {{ $product->UnitPrice }} PHP
+                    </h5>
+                  </div>
+                  {{-- category --}}
+                  @if ($product->category_id == 1)
+                  <h5>Silog</h5>
+                  @elseif($product->category_id == 1)
+                  <h5>Beverage</h5>
+                  @else
+                  <h5>Add-on</h5>
+                  @endif
+                  {{-- category-end --}}
+                  <p></p>
+                  <hr class="bg-white">
                   <p>{{ $product->ProdDescription }}</p>
                   <div class="options">
                     <h6>
-                     
                     </h6>
                     <a href="{{ route('admin.products.edit', $product->id) }}" style="color:black">Edit</a>
                     <button type="button" class="btn btn-sm btn-danger"

@@ -19,7 +19,7 @@ class TransactionsController extends Controller
     public function index()
     {
         $transactions = Transactions::latest()->paginate(10);
-        $ordersID = Transactions::pluck('orders_id')->toArray();
+        $ordersID = Transactions::pluck('orders_id')->reverse()->toArray();
         
         //get all orders model
         $models = Orders::find($ordersID);

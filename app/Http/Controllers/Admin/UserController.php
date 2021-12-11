@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreEmployeeRequest;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Facades\Password;
@@ -17,9 +18,15 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth')->only(['index', 'create', 'destroy']);
+    }
+
     public function index()
     {
-        $users = User::where('role', 1)->paginate(10);
+        $users = User::latest()->where('role', 1)->paginate(10);
         return view('admin.users.index', ['users' => $users]);
     }
 

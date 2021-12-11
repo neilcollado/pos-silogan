@@ -6,8 +6,8 @@
 <div class="login-page" style="margin-top: -100px; margin-bottom: -60px">
 <div style="font-size: 25px; color:white">{{ __('Add Employee') }}</div>
   <div class="form">
-    <form class="login-form" method="POST" action="{{ route('admin.users.store') }}">
-            @include('admin.users.partials.form')
+    <form class="login-form" method="POST" action="{{ route('admin.users.store') }}" enctype="multipart/form-data">
+            @include('admin.users.partials.form2')
     </form>
   </div>
 </div>

@@ -32,10 +32,9 @@
              <div class="invoice-date">
                 <div class="date text-inverse m-t-5">{{ $date }}</div>
                 <div class="invoice-detail">
-                   <small>Transaction ID</small><br>
-                   #{{ $transaction->id }}<br>
-                   <small>Order Number</small><br>
-                   #{{ $orders->orderNo }}
+                   <small>Transaction ID</small>: #{{ $transaction->id }}
+                   <br><small>Order Number</small>: #{{ $orders->orderNo }}
+                   <br><small>Order Type</small>: <strong> {{ $orders->type }}</strong>
                 </div>
              </div>
           </div>

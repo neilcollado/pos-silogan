@@ -24,7 +24,6 @@
         @isset($product)
             <option value="{{ $product->category_id }}">{{ $category->CategoryName }}</option>
         @endisset
-            <option value="" selected disabled hidden>Category</option>
             <option value="1">Silog</option>
             <option value="2">Beverages</option>
             <option value="3">Add-On</option>
