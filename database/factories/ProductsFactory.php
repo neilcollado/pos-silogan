@@ -22,7 +22,9 @@ class ProductsFactory extends Factory
      */
     public function definition()
     {
-        $products = ['Porksilog', 'BurgerSteaksilog','Sardinesilog'];
+        $products = ['Porksilog', 'BurgerSteaksilog','Sardinesilog','Longsilog','Porksilog','Hotsilog','Chosilog','Sisigsilog','Tosilog','Hamsilog','Skinlesssilog','Bangsilog',
+        'Chicken Skinsilog','Baconsilog','Burger steaksilog','Beefloafsilog','Spamsilog','Tempurasilog','Coca Cola','Plain Water','Royal','Sprite','Garlic Rice','Plain Rice','Pepsi','Apple Tea',
+        'Hotdog','Tocino','Chicken Lumpia','Chicken Skin','Sardines','Bacon','Porkchop','Sisig','Chorizo'];
 
         // unique()->
 

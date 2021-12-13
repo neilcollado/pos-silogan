@@ -5,6 +5,9 @@
   @include('partials.alerts')
   <div class="d-flex justify-content-between mt-3">
     <div class="col-md-9">
+      @if ($orders->status == "paid")
+      <a href="{{ route('admin.orders.index') }}" class="btn btn-primary mb-2" type="button">Back to order listing</a>
+      @endif
       <table class="table" style="background-color: white">
         <thead>
           <tr>
@@ -25,15 +28,27 @@
               <td></td>
               <td>{{ $product->ProdName }}</td>
               <td>{{ $product->pivot->Quantity }}</td>
-              <td>{{ $product->UnitPrice }}</td>
-              <td>{{ $product->pivot->Quantity * $product->UnitPrice}}</td>
+              <td><strong>{{ $product->UnitPrice }}</strong> PHP</td>
+              <td><strong>{{ $product->pivot->Quantity * $product->UnitPrice}}</strong> PHP</td>
               
             </tr>
           @endforeach
+            @if ($orders->status == "paid")
+            <tr>
+              <td></td><td></td><td></td><td></td><td></td>
+              <td><strong>TOTAL</strong></td>
+              <td><strong>{{ $orders->Total }}</strong> PHP</td>
+            </tr>
+            <tr>
+              <td></td><td></td><td></td><td></td><td></td><td></td>
+              <td><a href="{{ route('admin.orders.complete', $orders->id) }}" class="btn btn-success" role="button">Complete</a></td>
+            </tr>
+            @endif
         </tbody>
       </table>
     </div>
 
+    @if ($orders->status == "pending")
     <div class="col-md-3">
       <form method="POST" action="{{ route('admin.transactions.store') }}" enctype="multipart/form-data" id="orderForm">
         @csrf
@@ -53,6 +68,9 @@
         </div>
       </form>     
     </div>
+    @endif
+
+    
     
     
 

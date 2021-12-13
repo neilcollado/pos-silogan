@@ -15,6 +15,10 @@ class ProductsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public $sortColumnName = 'created_at';
+
+    public $sortDirection = 'desc';
+
     public function __construct()
     {
         $this->middleware('isAdmin')->except('index','show');
@@ -22,10 +26,15 @@ class ProductsController extends Controller
 
     public function index()
     {
-        $products = Products::latest()->paginate(10);
+        $products = Products::orderBy($this->sortColumnName, $this->sortDirection)->paginate(10);
 
         return view('admin.products.index')
         ->with('products', $products);
+    }
+
+    public function sortBy($columnName)
+    {
+        dd("clicked");
     }
 
     /**

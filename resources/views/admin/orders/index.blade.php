@@ -34,6 +34,7 @@
                     <td class="text-center">{{ $op->type }}</td>
                     
                     <td class="text-center">
+                        <a href="{{ route('admin.orders.show', $op->id) }}" class="btn btn-sm btn-primary">View</a>
                         <a href="{{ route('admin.orders.complete', $op->id) }}" class="btn btn-sm btn-success" role="button">Complete</a>
                     </td>
                 </tr>
