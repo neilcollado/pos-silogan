@@ -3,11 +3,49 @@
 @section('content')
 <div class="container">
   @include('partials.alerts')
-  <div class="d-flex justify-content-between mt-3">
+  <div class="d-flex justify-content-center mt-3">
     <div class="col-md-9">
-      @if ($orders->status == "paid")
-      <a href="{{ route('admin.orders.index') }}" class="btn btn-primary mb-2" type="button">Back to order listing</a>
-      @endif
+     
+      
+
+    @if ($orders->status == "paid")
+    <a href="{{ route('admin.orders.index') }}" class="btn btn-primary mb-2" type="button">Back to order listing</a>
+    <table class="table rounded" style="background-color: white">
+      <thead>
+        <tr>
+          <th scope="col" class="text-center">Order ID: </th>
+          <th scope="col" class="text-center">Order No: </th>
+        </tr>
+        <tbody>
+          <td class="text-center">{{ $orders->id }}</td>
+          <td class="text-center">{{ $orders->orderNo }}</td>
+        </tbody>
+      </thead>
+    </table>
+    <table class="table rounded" style="background-color: white">
+      <thead>
+        
+      </thead>
+      <thead>
+        <th scope="col" class="text-center">Product Name</th>
+        <th scope="col" class="text-center">Quantity</th>
+      </thead>
+      <tbody>
+        @foreach ($orders->products as $product)
+          <tr>
+            <td class="text-center">{{ $product->ProdName }}</td>
+            <td class="text-center">{{ $product->pivot->Quantity }}</td>
+          </tr>
+        @endforeach
+          <tr>
+            <td></td>
+            <td class="text-center"><a href="{{ route('admin.orders.complete', $orders->id) }}" class="btn btn-success" role="button">Complete</a></td>
+          </tr>
+      </tbody>
+    </table>
+    @endif
+
+    @if ($orders->status == "pending")
       <table class="table" style="background-color: white">
         <thead>
           <tr>
@@ -48,7 +86,7 @@
       </table>
     </div>
 
-    @if ($orders->status == "pending")
+
     <div class="col-md-3">
       <form method="POST" action="{{ route('admin.transactions.store') }}" enctype="multipart/form-data" id="orderForm">
         @csrf
@@ -68,12 +106,8 @@
         </div>
       </form>     
     </div>
+
     @endif
-
-    
-    
-    
-
   </div>
 </div>
 @endsection
