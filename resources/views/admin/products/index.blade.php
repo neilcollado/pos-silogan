@@ -21,9 +21,8 @@
                 <th scope="col" class="col-md-1 text-center">Category</th>
                 <th scope="col" class="col-md-1 text-center">UnitPrice</th>
                 <th scope="col" class="col-md-1 text-center">Available</th>
-                @can('is-admin')
                 <th scope="col" class="col-md-1 text-center">Actions</th>
-                @endcan
+                
             </tr>
             </thead>
             <tbody>
@@ -66,8 +65,8 @@
                             @csrf
                             @method('DELETE')
                         </form>
-                    </td>
-                    @endcan
+                        @endcan
+                    </td>  
                 </tr>
             @endforeach    
             </tbody>

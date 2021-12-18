@@ -27,7 +27,7 @@
                     <td class="text-center">{{ $transaction->total }} PHP</td>
                     <td class="text-center">{{ $transaction->payment }} PHP</td>
                     <td class="text-center">{{ $transaction->change }} PHP</td>
-                    <td class="text-center">{{ $transaction->created_at }}</td>
+                    <td class="text-center">{{ $transaction->created_at->toDateString() }}</td>
                     <td class="text-center">
                         <a href="{{ route('admin.transactions.show', $transaction->id) }}" class="btn btn-sm btn-primary">View</a>
                     </td>
